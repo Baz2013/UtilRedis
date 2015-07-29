@@ -20,6 +20,9 @@ class RedisUtil{
 		bool initial(const string &host,const int port);
 		bool initial(const string &host,const int port,const struct timeval tv);
 		~RedisUtil();
+		string get(const string &key);
+		bool set(const string &key,const string &value);
+		bool set(const string &key,const int value);
 };
 
 #endif
