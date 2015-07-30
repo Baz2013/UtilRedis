@@ -91,3 +91,31 @@ bool RedisUtil::append(const string &key,const string &value){
 
 	return true;
 }
+
+//private 方法
+/*
+ * 判断字符串是否全部是数字
+ */
+bool RedisUtil::valueIsNum(const string &str){
+	if(str.length() == 0)
+		return false;
+	size_t len = str.length();
+
+	for(int i = 0;i < len;i++){
+		if(!isdigit(str[i]))
+			return false;
+	}
+
+	return true;
+}
+
+/*
+ * 判断键是否存在
+ */
+bool RedisUtil::keyExists(const string &key){
+	return true;
+}
+
+bool RedisUtil::incr(const string &key){
+	m_redisReply = (redisReply *)redisCommand(m_redisConn,"incr %s",key.c_str());
+}
