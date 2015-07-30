@@ -57,3 +57,37 @@ bool RedisUtil::set(const string &key,const string &value){
 
 	return true;
 }
+
+bool RedisUtil::set(const string &key,const int value){
+	m_redisReply = (redisReply *)redisCommand(m_redisConn,"set %s %d",key.c_str(),value);
+	if(m_redisReply == NULL){
+		cout<<"执行命令失败"<<endl;
+		return false;
+	}
+
+	return true;
+}
+
+int RedisUtil::strlen(const string &key){
+	m_redisReply = (redisReply *)redisCommand(m_redisConn,"strlen %s",key.c_str());
+	if(m_redisReply->type == REDIS_REPLY_NIL){
+		cout<<"键"<<key<<"不存在"<<endl;
+		return -1;
+	}else if(m_redisReply->type != REDIS_REPLY_INTEGER){
+		cout<<"命令执行错误"<<endl;
+		return -1;
+	}
+
+	return m_redisReply->integer;
+}
+
+bool RedisUtil::append(const string &key,const string &value){
+	m_redisReply = (redisReply *)redisCommand(m_redisConn,"append %s %s",key.c_str(),value.c_str());
+	if(m_redisReply->type == REDIS_REPLY_ERROR){
+		cout<<"命令执行失败"<<endl;
+		cout<<"错误信息:"<<m_redisReply->str<<endl;
+		return false;
+	}
+
+	return true;
+}

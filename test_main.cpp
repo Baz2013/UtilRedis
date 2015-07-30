@@ -17,6 +17,12 @@ int main(int argc,char **argv)
 	string str = r_util.get("name");
 	cout<<str<<endl;
 	r_util.set("qq","1678104640");
+	
+	r_util.set("mail","sd4313@163.com");
+	int len = r_util.strlen("qq");
+	cout<<"qq lenght is:"<<len<<endl;
+
+	r_util.append("name"," chuan bing");
 
 	return 0;
 }
