@@ -111,8 +111,13 @@ bool RedisUtil::valueIsNum(const string &str){
 
 /*
  * 判断键是否存在
+ * 
  */
 bool RedisUtil::keyExists(const string &key){
+	if(key.empty()){
+		cout<<"key is null"<<endl;
+		return false;
+	}
 	return true;
 }
 
